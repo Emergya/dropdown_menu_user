@@ -203,7 +203,8 @@ function dropdown_menu_user_login_block_get_menu_items() {
 function dropdown_menu_user_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
-      $form['#action'] = 'user';
+      global $language;
+      $form['#action'] = base_path() . $language->language . "/" . 'user';
       $form['#method'] = 'post';
       $form['form_id'] = array(
         '#type' => 'hidden',
