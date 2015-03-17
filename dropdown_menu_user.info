@@ -1,5 +1,5 @@
 name = Dropdown menu user
-description = Module that provides a new user login into a block
+description = Module that provides a new drop down user menu and user login block
 package = Dropdown menu user
 version = "7.x-1.x"
 core = "7.x"
