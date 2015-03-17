@@ -23,9 +23,6 @@ function dropdown_menu_user_get_image_style() {
  * @param $block
  */
 function dropdown_menu_user_login_block_view(&$block) {
-  drupal_add_css(drupal_get_path('module', 'dropdown_menu_user') . '/css/dropdown_menu_user.css');
-  drupal_add_js(drupal_get_path('module', 'dropdown_menu_user') . '/js/dropdown_menu_user.js');
-
   global $user;
   if (!empty($user->uid)) {
     $account = user_load($user->uid);
@@ -49,11 +46,15 @@ function dropdown_menu_user_login_block_view(&$block) {
     );
 
     $block_header = render($block_header_render);
-    $block_body = theme('item_list', array('items' => dropdown_menu_user_login_block_get_menu_items()));
+    // Get the rendered array.
+    $block_body_render = dropdown_menu_user_render_menu_items();
+    $block_body = render($block_body_render);
   }
   else {
     // If the user isn't logged: Show user login block.
-    $block_header = '<span>' . t('Access') . '</span>';
+    $block_header = '<span>' . l(t('Sign up'), 'user/register') . '</span>' .
+                    '<span>' . t('or') . '</span>' .
+                    '<span class="user-login">' . t('Login') . '</span>';
     $form = drupal_get_form('user_login_block');
     $block_body = drupal_render($form);
   }
@@ -62,6 +63,10 @@ function dropdown_menu_user_login_block_view(&$block) {
     '#theme' => 'dropdown_menu_user_login_block',
     '#block_header' => $block_header,
     '#block_body' => $block_body,
+    '#attached' => array(
+      'js' => array(drupal_get_path('module', 'dropdown_menu_user') . '/js/dropdown_menu_user.js'),
+      'css' => array(drupal_get_path('module', 'dropdown_menu_user') . '/css/dropdown_menu_user.css'),
+    ),
   );
 
   if (!variable_get('dropdown_menu_user_disable_user_menu', '')) {
@@ -72,15 +77,18 @@ function dropdown_menu_user_login_block_view(&$block) {
 /**
  * Callback to build menu items for current user.
  */
-function dropdown_menu_user_login_block_get_menu_items() {
+function dropdown_menu_user_render_menu_items() {
   $items = array();
 
   $items['profile'] = array(
     'data' => l(t('My profile'), 'user'),
   );
-  $items['profile2'] = array(
+  $items['configuration'] = array(
     'data' => l(t('Configuration'), 'admin/settings/dropdown_menu_user'),
   );
 
-  return $items;
+  return array(
+    '#theme' => 'item_list',
+    '#items' => $items,
+  );
 }

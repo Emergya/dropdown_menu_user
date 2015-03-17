@@ -4,6 +4,3 @@ package = Dropdown menu user
 version = "7.x-1.x"
 core = "7.x"
 project = "dropdown_menu_user"
-
-files[] = dropdown_menu_user.inc
-files[] = dropdown_menu_user.admin.inc
