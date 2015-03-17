@@ -98,7 +98,16 @@ function dropdown_menu_user_block_view($delta = '') {
 function dropdown_menu_user_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
-      $form['#action'] = 'user';
+      //Check if we have to insert prefix in the form's action
+      global $language;
+      $url = "";
+      if (!empty($language->prefix)) {
+        $url = base_path() . $language->prefix . "/" . 'user';
+      }
+      else {
+        $url = base_path() . 'user';
+      }
+      $form['#action'] = $url;
       $form['#method'] = 'post';
       $form['form_id'] = array(
         '#type' => 'hidden',
