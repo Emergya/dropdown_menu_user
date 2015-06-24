@@ -1,12 +1,20 @@
-<div class="user">
-  <div class="user-image">
-    <?php if (isset($user['image'])): ?>
-      <?php print($user['image']); ?>
-    <?php endif; ?>
-  </div>
-  <div class="user-name">
-    <?php if (isset($user['name'])): ?>
-      <span><?php print($user['name']); ?></span>
-    <?php endif; ?>
+<div class="user-login">
+  <div class="main-wrapper">
+    <div class="user-info">
+      <?php if (isset($user['image'])): ?>
+        <div class="user-image">
+          <?php print($user['image']); ?>
+        </div>
+      <?php endif; ?>
+      <?php if (isset($user['name'])): ?>
+        <div class="user-name">
+          <span><?php print($user['name']); ?></span>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <div class="user-settings">
+      <div><?php print t('Settings'); ?></div>
+    </div>
   </div>
 </div>

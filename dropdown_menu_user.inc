@@ -2,11 +2,14 @@
 
 /**
  * @file
- * General DROPDOWN MENU USER functionality and helper functions.
+ * General functionality and helper functions.
  */
 
 /**
- * Callback to get all the image styles available.
+ * Callback to get all the image styles available
+ *
+ * @return array
+ *  Image styles.
  */
 function dropdown_menu_user_get_image_style() {
   $styles = array();
@@ -20,10 +23,13 @@ function dropdown_menu_user_get_image_style() {
 
 /**
  * Callback to build different forms depending on whether the user is online or not.
+ *
  * @param $block
+ *  Dropdown menu.
  */
 function dropdown_menu_user_login_block_view(&$block) {
   global $user;
+
   if (!empty($user->uid)) {
     $account = user_load($user->uid);
     $image_style = variable_get('dropdown_menu_user_image_style', 'avatar');
@@ -51,7 +57,7 @@ function dropdown_menu_user_login_block_view(&$block) {
     $block_body = render($block_body_render);
   }
   else {
-    // If the user isn't logged: Show user login block.
+    // If the user isn't logged show user login block.
     $block_header = '<span>' . l(t('Sign up'), 'user/register') . '</span>' .
                     '<span>' . t('or') . '</span>' .
                     '<span class="user-login">' . t('Login') . '</span>';
@@ -76,6 +82,9 @@ function dropdown_menu_user_login_block_view(&$block) {
 
 /**
  * Callback to build menu items for current user.
+ *
+ * @return array
+ *  Dropdown menu links.
  */
 function dropdown_menu_user_render_menu_items() {
   $items = array();
@@ -84,7 +93,10 @@ function dropdown_menu_user_render_menu_items() {
     'data' => l(t('My profile'), 'user'),
   );
   $items['configuration'] = array(
-    'data' => l(t('Configuration'), 'admin/settings/dropdown_menu_user'),
+    'data' => l(t('Configuration'), 'admin/config/people/dropdown_menu_user'),
+  );
+  $items['logout'] = array(
+    'data' => l(t('Logout'), 'user/logout'),
   );
 
   return array(

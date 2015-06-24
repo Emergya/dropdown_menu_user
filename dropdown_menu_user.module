@@ -2,12 +2,7 @@
 
 /**
  * @file
- * Dropdown menu user is a module written by:
- *  - Fork 6.x.1.x: Nesta.
- *  - Fork 7.x.1.x: Diego Marrufo.
- *
- * This module creates a button access user login block.
- *
+ * Build our own dropdown menu.
  */
 
 /**
@@ -33,7 +28,7 @@ function dropdown_menu_user_menu() {
  */
 function dropdown_menu_user_permission() {
   return array(
-    'Administer dropdown menu user' => array(
+    'administer_dropdown_menu_user' => array(
       'title' => t('Administer dropdown menu user'),
       'description' => t('Administer dropdown menu user settings.'),
     ),
@@ -98,22 +93,31 @@ function dropdown_menu_user_block_view($delta = '') {
 function dropdown_menu_user_form_alter(&$form, &$form_state, $form_id) {
   switch ($form_id) {
     case 'user_login_block':
-      //Check if we have to insert prefix in the form's action
       global $language;
-      $url = "";
+
+      // Check if we have to insert prefix in the form's action.
       if (!empty($language->prefix)) {
         $url = base_path() . $language->prefix . "/" . 'user';
       }
       else {
         $url = base_path() . 'user';
       }
+
       $form['#action'] = $url;
       $form['#method'] = 'post';
       $form['form_id'] = array(
         '#type' => 'hidden',
         '#default_value' => 'user_login',
       );
-      unset($form['links']);
+
+      // Link for recover password.
+      $items[] = l(t('Request new password'), 'user/password', array(
+        'attributes' => array(
+          'title' => t('Request new password via e-mail.')
+        )
+      ));
+
+      $form['links'] = array('#markup' => theme('item_list', array('items' => $items)));
       break;
   }
 }

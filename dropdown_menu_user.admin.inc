@@ -2,18 +2,22 @@
 
 /**
  * @file
- * General DROPDOWN MENU USER administration pages
+ * Administration page.
  */
 
 /**
- * Displays the form available in the administration interface of module.
+ * Configuration form.
+ * Here you can disable dropdown menu or choose a new style of image.
+ *
+ * @return mixed
+ *  Form configuration.
  */
 function dropdown_menu_user_admin() {
   module_load_include('inc', 'dropdown_menu_user');
 
   $form['settings'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Settings User Profile'),
+    '#title' => t('Settings user profile'),
   );
 
   $form['settings']['dropdown_menu_user_image_style'] = array(
