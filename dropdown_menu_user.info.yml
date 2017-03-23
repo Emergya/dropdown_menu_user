@@ -1,0 +1,8 @@
+name: 'Dropdown menu user'
+type: module
+description: 'Module that provides a new dropdown user menu and user login block'
+package: 'Dropdown menu user'
+version: '8.x-1.x'
+core: '8.x'
+project: 'dropdown_menu_user'
+configure: dropdown_menu_user.settings

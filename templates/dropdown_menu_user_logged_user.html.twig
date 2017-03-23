@@ -1,20 +1,25 @@
 <div class="user-login">
   <div class="main-wrapper">
     <div class="user-info">
-      <?php if (isset($user['image'])): ?>
+      {% if user.image %}
         <div class="user-image">
-          <?php print($user['image']); ?>
+          {{ user.image }}
         </div>
-      <?php endif; ?>
+      {%  endif %}
+      {% if user.name %}
       <?php if (isset($user['name'])): ?>
         <div class="user-name">
-          <span><?php print($user['name']); ?></span>
+          <span>{{ user.name }}</span>
         </div>
-      <?php endif; ?>
+      {% endif %}
     </div>
 
     <div class="user-settings">
-      <div><?php print t('Settings'); ?></div>
+      <div>
+        {% trans %}
+          Settings
+        {% endtrans %}
+      </div>
     </div>
   </div>
 </div>

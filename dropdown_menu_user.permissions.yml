@@ -1,0 +1,4 @@
+administer_dropdown_menu_user:
+  title: 'Administer dropdown menu user'
+  description: 'Administer dropdown menu user settings.'
+  restrict access: TRUE

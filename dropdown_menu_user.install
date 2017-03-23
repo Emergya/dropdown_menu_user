@@ -5,28 +5,35 @@
  * Establishes a default image style.
  */
 
+use Drupal\image\Entity\ImageStyle;
+
 /**
  * Implements hook_install().
  */
 function dropdown_menu_user_install() {
-  $style = image_style_save(array('name' => 'avatar'));
-
-  $effect = array(
-    'name' => 'image_scale',
-    'data' => array(
-      'width' => 32,
-      'height' => 32,
+  $style = ImageStyle::create(array('name' => 'avatar', 'label' => 'Avatar'));
+  
+  $configuration = array(
+    'uuid'   => NULL,
+    'id'     => 'image_scale',
+    'weight' => 0,
+    'data'   => array(
+      'width'  => 100,
+      'height' => 100,
       'upscale' => TRUE,
     ),
-    'isid' => $style['isid'],
   );
+  $effect = \Drupal::service('plugin.manager.image.effect')->createInstance($configuration['id'], $configuration);
 
-  image_effect_save($effect);
+  // Add it to the image style and save.
+  $style->addImageEffect($effect->getConfiguration());
+  $style->save();
 }
 
 /**
  * Implements hook_uninstall().
  */
 function dropdown_menu_user_uninstall() {
-  image_style_delete(image_style_load('avatar'));
+  $style = ImageStyle::load('avatar');
+  $style->delete();
 }
