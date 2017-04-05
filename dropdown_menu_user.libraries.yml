@@ -1,0 +1,10 @@
+dropdown_menu_user:
+  css:
+    theme:
+      css/dropdown_menu_user.css: {}
+  js:
+    js/dropdown_menu_user.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once

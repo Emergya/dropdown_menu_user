@@ -8,7 +8,7 @@
 /**
  * Implementation of hook_menu().
  */
-function dropdown_menu_user_menu() {
+/*function dropdown_menu_user_menu() {
   $items = array();
 
   $items['admin/config/people/dropdown_menu_user'] = array(
@@ -21,24 +21,24 @@ function dropdown_menu_user_menu() {
   );
 
   return $items;
-}
+}*/
 
 /**
  * Implements hook_permission().
  */
-function dropdown_menu_user_permission() {
+/*function dropdown_menu_user_permission() {
   return array(
     'administer_dropdown_menu_user' => array(
       'title' => t('Administer dropdown menu user'),
       'description' => t('Administer dropdown menu user settings.'),
     ),
   );
-}
+}*/
 
 /**
  * Implements hook_block_info().
  */
-function dropdown_menu_user_block_info() {
+/*function dropdown_menu_user_block_info() {
   $block = array();
 
   $block['dropdown_menu_user_login_block'] = array(
@@ -48,7 +48,7 @@ function dropdown_menu_user_block_info() {
   );
 
   return $block;
-}
+}*/
 
 /**
  * Implements of hook_theme().
@@ -74,7 +74,7 @@ function dropdown_menu_user_theme() {
 /**
  * Implements hook_block_view().
  */
-function dropdown_menu_user_block_view($delta = '') {
+/*function dropdown_menu_user_block_view($delta = '') {
   $block = array();
 
   switch ($delta) {
@@ -85,7 +85,7 @@ function dropdown_menu_user_block_view($delta = '') {
   }
 
   return $block;
-}
+}*/
 
 /**
  * Implements hook_form_alter().

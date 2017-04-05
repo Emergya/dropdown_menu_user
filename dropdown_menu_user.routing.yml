@@ -1,0 +1,7 @@
+dropdown_menu.user_settings:
+  path: '/admin/config/people/dropdown_menu_user'
+  defaults:
+    _form: 'Drupal\dropdown_menu_user\Form\DropdownMenuUserSettingsForm'
+    _title: 'Dropdown menu user settings'
+  requirements:
+    _permission: 'Administer dropdown menu user'
